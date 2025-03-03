@@ -1,7 +1,11 @@
 import streamlit as st
+import csv
 import xml.etree.ElementTree as ET
+import time
+import pandas as pd
+import lxml
 
-# Firstly - data options/XML structures -> objects
+
 xml_data_empty = """<?xml version="1.0" encoding="UTF-8"?>
 <invoice>
   <header>
@@ -27,7 +31,7 @@ xml_data_empty = """<?xml version="1.0" encoding="UTF-8"?>
 """
 
 
-xml_data_summatch = """<?xml version="1.0" encoding="UTF-8"?>
+xml_data_in_valid = """<?xml version="1.0" encoding="UTF-8"?>
 <invoice>
   <header>
     <customer>ABC s.r.o</customer>
@@ -51,7 +55,7 @@ xml_data_summatch = """<?xml version="1.0" encoding="UTF-8"?>
 </invoice>
 """
 
-xml_data_sumnotmatch = """<?xml version="1.0" encoding="UTF-8"?>
+xml_data_in_NOT_valid = """<?xml version="1.0" encoding="UTF-8"?>
 <invoice>
   <header>
     <customer>ABC s.r.o</customer>
@@ -77,51 +81,24 @@ xml_data_sumnotmatch = """<?xml version="1.0" encoding="UTF-8"?>
 
 # Frontend part
 
-st.set_page_config(page_title="XML download")
-st.write("# XML download")
-st.write(
-    '''
-Here you can download XML which can be used for parsing. There are 3 options from which to select.
-'''
-)
-
 st.write("------")
 
-# Option 1
-st.write("#### 1) Predefined file - sum matches")
-st.write(
-    '''
-Simple scenario where <total_sum> field matches the sum of <price> in detail elements.
-'''
-)
+st.write("# 1) Predefined file - sum matches")
 st.image("Pictures/XML 2.png")
 
-if st.download_button("Download",data = xml_data_summatch  , file_name="XML_sum matching.xml"):
+if st.download_button("Download",data = xml_data_in_valid  , file_name="XML_sum matching.xml"):
     st.info("Download will happen in few seconds")
 
 st.write("------")
 
-
-# Option 2
-st.write("#### 2) Predefined file - sum does not match")
-st.write(
-    '''
-Scenario where <total_sum> field does not matches the sum of <price> in detail elements. Which will be seen in the parsing data step where there is validation of values built.
-'''
-)
+st.write("# 2) Predefined file - sum does not match")
 st.image("Pictures/XML 3.png")
-if st.download_button("Download",data = xml_data_sumnotmatch  , file_name="XML_sum not matchining.xml"):
+if st.download_button("Download",data = xml_data_in_NOT_valid  , file_name="XML_sum not matchining.xml"):
     st.info("Download will happen in few seconds")
 
 st.write("------")
 
-# Option 3
-st.write("#### 3) XML template with no values")
-st.write(
-    '''
-There can be data filled into templete. Just XML structure to be downloaded.
-'''
-)
+st.write("# 3) XML template with no values")
 st.image("Pictures/XML 1.png")
 if st.download_button("Download",data = xml_data_empty , file_name="XML_empty_template.xml"):
     st.info("Download will happen in few seconds")

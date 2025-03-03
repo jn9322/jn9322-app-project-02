@@ -1,12 +1,11 @@
 import streamlit as st
-import csv
 import xml.etree.ElementTree as ET
 import time
 
 
+st.write("# Upload XML:")
 
-
-object_from_upload = st.file_uploader("Upload your XML:")
+object_from_upload = st.file_uploader("")
 
 if object_from_upload is None:
     st.info("When a file uploaded, application will start")
@@ -67,7 +66,7 @@ if object_from_upload is not None:
     def data_validation(value_total_sum, pri_value_1, pri_value_2, pri_value_3):
         result = value_total_sum - pri_value_1 - pri_value_2 - pri_value_3
         st.write("---------")
-        st.write("Validation process:")
+        st.write("# Validation process:")
         
         if result < 0 or result > 0:
             st.warning("Validation not passed - summary does not equeal to line values. You can either continue with existing file or adjust the input file and upload it again.")
@@ -84,6 +83,8 @@ if object_from_upload is not None:
     result_obj_outcome = result_validation[0]
 
     # nejaky tlacitko na praci s tema hodnotama
+
+    st.write("# Check your data:")
 
     if st.button("Summary overview"):
         st.write(f"Receiver of the invoice: {value_customer}")
