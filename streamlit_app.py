@@ -25,7 +25,7 @@ pg = st.navigation(
     {
         "Welcome": [app_description],
         #"Testuju": [testuju],
-        "Parsing": [parsing,download]
+        "Parsing": [download,parsing]
     }
 )
 pg.run()
