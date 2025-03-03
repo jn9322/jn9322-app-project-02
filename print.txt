@@ -1,1 +1,1 @@
-Date: 03-03-2025, Day: Mon, Time: 15:03:22 - Validation: Not passed --- Receiver: ABC s.r.o., price to pay 33333.00 Kc.
+Date: 03-03-2025, Day: Mon, Time: 17:47:36 - Validation: Not passed --- Receiver: ABC s.r.o., price to pay 33333.00 Kc.
