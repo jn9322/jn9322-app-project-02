@@ -1,6 +1,8 @@
 import streamlit as st
 import xml.etree.ElementTree as ET
 import time
+import plotly.express as px
+import pandas as pd
 
 
 st.write("# Upload XML:")
@@ -66,7 +68,7 @@ if object_from_upload is not None:
     def data_validation(value_total_sum, pri_value_1, pri_value_2, pri_value_3):
         result = value_total_sum - pri_value_1 - pri_value_2 - pri_value_3
         st.write("---------")
-        st.write("# Validation process:")
+        st.write("#### Validation process:")
         
         if result < 0 or result > 0:
             st.warning("Validation not passed - summary does not equeal to line values. You can either continue with existing file or adjust the input file and upload it again.")
@@ -82,9 +84,10 @@ if object_from_upload is not None:
 
     result_obj_outcome = result_validation[0]
 
-    # nejaky tlacitko na praci s tema hodnotama
+    # Buttons to show values
 
-    st.write("# Check your data:")
+    st.write("------")
+    st.write("#### Check your data:")
 
     if st.button("Summary overview"):
         st.write(f"Receiver of the invoice: {value_customer}")
@@ -95,7 +98,45 @@ if object_from_upload is not None:
         st.write(f"Item 2: Product: {produ_value_2}, Category - {c_value_2}, Price: {pri_value_2} Kc.")
         st.write(f"Item 3: Product: {produ_value_3}, Category - {c_value_3}, Price: {pri_value_3} Kc.")
 
+        # Pie chart
+        data = pd.DataFrame({
+        "Product" : [produ_value_1,produ_value_2,produ_value_3],
+        "Price" : [pri_value_1,pri_value_2,pri_value_3]
+        })
+
+
+        fig_pie = px.pie(
+            data, 
+            names = "Product",
+            values = "Price",
+            title = "Pie chart - ratio of the total sum"
+        )
+
+        st.plotly_chart(fig_pie)
+
+        fig_bar = px.bar(
+            data, 
+            x="Product",
+            y="Price",
+            title= "Bar chart   "
+        )
+
+        st.plotly_chart(fig_bar)
+
     # final outcome for print - using server time
+
+    st.write("------")
+    st.write("#### Download of .txt:")
+    st.write('''Here is short summary of the original XML invoice, including result of validation and date.''')
+
+    st.image("Pictures/outcome txt picture.png")
+    st.write(" ")
+    st.image("Pictures/Validation passed picture txt.png")
+    st.write(" ")
+    st.image("Pictures/Validation NOT passed picture txt.png")
+    st.write(" ")
+
+    # backend part
     time_objects = time.localtime()
     year, month, day, hour, minute, second, weekday, yearday, daylight = time_objects  
 
@@ -108,10 +149,12 @@ if object_from_upload is not None:
     final_outcome = (f"{full_date_outcome} - Validation: {result_obj_outcome} --- Receiver: {value_customer}, price to pay {value_total_sum} Kc.")
 
 
-    if st.download_button("Print/Download - Summary overview", data= final_outcome, file_name="Summary.txt"):
+    if st.download_button("Download", data= final_outcome, file_name="Summary.txt"):
         
         file = open("print.txt","w")
 
         file.write(final_outcome)
         file.close()
         st.info("download will start in few seconds")
+
+    st.write("------")

@@ -2,5 +2,6 @@ streamlit
 pandas
 st_pages
 lxml
+plotly.express
 
 
