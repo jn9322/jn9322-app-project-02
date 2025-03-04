@@ -27,26 +27,26 @@ app_description_BPMN = st.Page(
 
 download = st.Page(
     "Subpages/XML_dowload.py",
-    title="XML - Download"
+    title="1. XML - Download"
     )
 
 xsd = st.Page(
     "Subpages/XML_XSD_schema.py",
-    title="XML - XSD, XML Schema"
+    title="Description - XSD, XML Schema"
     )
 
 parsing = st.Page(
     "Subpages/XML_parsing_to_txt_outcome.py",
-    title="XML - Parsing"
+    title="2. XML - Parsing, Validation, Vizualization"
     )
 
 
 # Navigation
 pg = st.navigation(
     {
-        "Welcome": [app_purpose , app_description_ArM , app_description_BPMN],
-        "Testuju": [testuju],
-        "XML Data Parsing": [xsd , download , parsing]
+        "About this application": [app_purpose , app_description_ArM , app_description_BPMN , xsd],
+        #"Testuju": [testuju],
+        "Application functions": [download , parsing]
     }
 )
 pg.run()

@@ -197,7 +197,7 @@ st.write(
 Here you can download XML which can be used for parsing. There are 5 options from which to select. 
 
 1) Predefind file - sum matches - 6 detail levels
-2) Predefind file - sum does not matche - 6 detail levels
+2) Predefind file - sum does not match - 6 detail levels
 3) Empty file - just XML structure, no values - 6 detail levels
 4) Predefind file - sum matches - 12 detail levels
 5) Customized file - There can be how many detail levels you want. (Only what needs to be kept is XML structer and XML rules). More details in section 'XML - XSD, XML Schema' in the navigation bar.
