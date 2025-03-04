@@ -24,7 +24,7 @@ parsing = st.Page("Subpages/XML_parsing_to_txt_outcome.py", title="XML parsing")
 pg = st.navigation(
     {
         "Welcome": [app_description],
-        #"Testuju": [testuju],
+        "Testuju": [testuju],
         "Parsing": [download,parsing]
     }
 )

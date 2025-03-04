@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import time
 import plotly.express as px
 import pandas as pd
+import math
 
 
 st.write("# Upload XML:")
@@ -25,53 +26,49 @@ if object_from_upload is not None:
     # Data parsing from header
     value_customer = root[0][0].text
     value_total_sum = root[0][1].text
-    
-   
-    # Data parsing from detail
+
+        
+    # Data parsing from details
     value_category_list = []
     for detail_category in root.findall('detail'):
         category = detail_category.find('category').text
         value_category_list.append(category)
 
-    print(value_category_list)
-    c_value_1 = value_category_list[0]
-    c_value_2 = value_category_list[1]
-    c_value_3 = value_category_list[2]
-   
+
     value_product_name_list = []
     for detail_product_name in root.findall('detail'):
         product_name = detail_product_name.find('product_name').text
         value_product_name_list.append(product_name)
 
-    produ_value_1 = value_product_name_list[0]
-    produ_value_2 = value_product_name_list[1]
-    produ_value_3 = value_product_name_list[2]
-    
 
     value_price_list = []
     for detail_price in root.findall('detail'):
         product_price = detail_price.find('price').text
         value_price_list.append(product_price)
         
+    
+    value_attribut = []
+    for detail_id in root.findall('detail'):
+        ids = detail_id.get('id')
+        value_attribut.append(ids)
 
-    pri_value_1 = value_price_list[0]
-    pri_value_2 = value_price_list[1]
-    pri_value_3 = value_price_list[2]
+    #Sum of prices - type change string -> float for calculation
+    value_price_list_float = list(map(float, value_price_list)) 
+    sum_price = math.fsum(value_price_list_float)
     
     # Data validation - sum = pri_values Y/N 
     value_total_sum_fl = float(value_total_sum)
-    pri_value_1_fl = float(pri_value_1)
-    pri_value_2_fl = float(pri_value_2)
-    pri_value_3_fl = float(pri_value_3)
+
 
     result_validation = []
-    def data_validation(value_total_sum, pri_value_1, pri_value_2, pri_value_3):
-        result = value_total_sum - pri_value_1 - pri_value_2 - pri_value_3
+    def data_validation(value_total_sum, sum_price):
+        result = value_total_sum - sum_price
         st.write("---------")
         st.write("#### Validation process:")
         
         if result < 0 or result > 0:
             st.warning("Validation not passed - summary does not equeal to line values. You can either continue with existing file or adjust the input file and upload it again.")
+            st.write(f"** Total sum in the XML invoice is: '{value_total_sum}' but summary of prices in detail lines / per product is: '{sum_price}'.")
             outcome = ("Not passed")
             result_validation.append(outcome)
 
@@ -80,7 +77,7 @@ if object_from_upload is not None:
             outcome = ("Passed")
             result_validation.append(outcome)
 
-    data_validation(value_total_sum_fl, pri_value_1_fl, pri_value_2_fl, pri_value_3_fl)
+    data_validation(value_total_sum_fl, sum_price)
 
     result_obj_outcome = result_validation[0]
 
@@ -94,14 +91,26 @@ if object_from_upload is not None:
         st.write(f"Total sum: {value_total_sum} Kc")
 
     if st.button("Detail overview"):
-        st.write(f"Item 1: Product: {produ_value_1}, Category - {c_value_1}, Price: {pri_value_1} Kc.")
-        st.write(f"Item 2: Product: {produ_value_2}, Category - {c_value_2}, Price: {pri_value_2} Kc.")
-        st.write(f"Item 3: Product: {produ_value_3}, Category - {c_value_3}, Price: {pri_value_3} Kc.")
+
+        # Transformation of Data to table -> not editable
+        data_table = pd.DataFrame({
+                    "Order" : value_attribut,
+                    "Product" : value_product_name_list,
+                    "Price" : value_price_list,
+                    "Category" : value_category_list
+                                     
+                    })
+        
+        # This is adjusting the table
+        data_table_2 = st.dataframe(data=data_table, hide_index=True, use_container_width=True)
+        
+
+         
 
         # Pie chart
         data = pd.DataFrame({
-        "Product" : [produ_value_1,produ_value_2,produ_value_3],
-        "Price" : [pri_value_1,pri_value_2,pri_value_3]
+        "Product" : value_product_name_list,
+        "Price" : value_price_list
         })
 
 
