@@ -10,14 +10,19 @@ testuju = st.Page(
     title="TESTUJU"
     )
 
+app_purpose = st.Page(
+    "Subpages/Purpose_of_app.py",
+    title="Purpose of this application"
+    )
+
 app_description_ArM = st.Page(
     "Subpages/application_description_archimate.py",
-    title="Application Description Archimate"
+    title="Description Archimate"
     )
 
 app_description_BPMN = st.Page(
     "Subpages/application_description_BPMN.py",
-    title="Application Description BPMN"
+    title="Description BPMN"
     )
 
 download = st.Page(
@@ -39,7 +44,7 @@ parsing = st.Page(
 # Navigation
 pg = st.navigation(
     {
-        "Welcome": [app_description_ArM , app_description_BPMN],
+        "Welcome": [app_purpose , app_description_ArM , app_description_BPMN],
         "Testuju": [testuju],
         "XML Data Parsing": [xsd , download , parsing]
     }

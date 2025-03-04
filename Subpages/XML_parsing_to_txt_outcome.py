@@ -84,7 +84,7 @@ if object_from_upload is not None:
     # Buttons to show values
 
     st.write("------")
-    st.write("#### Check your data:")
+    st.write("#### Data Visualization:")
 
     if st.button("Summary overview"):
         st.write(f"Receiver of the invoice: {value_customer}")
