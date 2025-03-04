@@ -15,10 +15,10 @@ app_purpose = st.Page(
     title="Purpose of this application"
     )
 
-# app_description_ArM = st.Page(
-#     "Subpages/application_description_archimate.py",
-#     title="Description Archimate"
-#     )
+app_description_ArM = st.Page(
+    "Subpages/application_description_archimate.py",
+    title="Description Archimate"
+    )
 
 app_description_BPMN = st.Page(
     "Subpages/application_description_BPMN.py",
@@ -44,8 +44,7 @@ parsing = st.Page(
 # Navigation
 pg = st.navigation(
     {
-        "About this application": [app_purpose , app_description_BPMN , xsd],
-        #"About this application": [app_purpose , app_description_ArM , app_description_BPMN , xsd],
+        "About this application": [app_purpose , app_description_ArM , app_description_BPMN , xsd],
         #"Testuju": [testuju],
         "Application functions": [download , parsing]
     }
