@@ -11,6 +11,13 @@ st.write(
 
 st.write(" ")
 
+st.write("##### Business scenario:") 
+st.write(
+    "Simplified version of case when a company does a purchase from other company/e-shop on frequent bases. That is why there is XML invoice defined for invoicing.This parsing application could be seen like very small ERP system/ERP program :)."
+    )
+
+st.write(" ")
+
 st.write("##### Process:") 
 st.write("""
     1) Dowload XML (keep existing or you can update it) 
