@@ -45,7 +45,7 @@ parsing = st.Page(
 pg = st.navigation(
     {
         "About this application": [app_purpose , app_description_ArM , app_description_BPMN , xsd],
-        #"Testuju": [testuju],
+        "Testuju": [testuju],
         "Application functions": [download , parsing]
     }
 )
