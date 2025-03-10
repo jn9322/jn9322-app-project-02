@@ -41,7 +41,7 @@ parsing = st.Page(
     )
 
 
-# Navigation
+# Navigation:
 pg = st.navigation(
     {
         "About this application": [app_purpose , app_description_ArM , app_description_BPMN , xsd],
