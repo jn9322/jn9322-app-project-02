@@ -170,7 +170,8 @@ if object_from_upload is not None:
 
     st.write("------")
     st.write("#### Data Visualization:")
-
+    ''
+    ''
     if st.button("Summary overview"):
         st.write(f"Sumary:")
         st.write(f" - Invoice number: {value_invoice_num}")
@@ -187,8 +188,11 @@ if object_from_upload is not None:
         st.write(f" - Sum of additional services: {sum_additional_serv:.2f} {currency}")
         st.write(f" - Extended varanty: {sum_price_varanty:.2f} {currency}")
         st.write(f" - Insurance: {sum_price_insurance:.2f} {currency}")
-
-
+    ''
+    ''
+    ''
+    ''
+    st.write("###### Interactive table and charts:")
 
     # Transformation of Data to table -> not editable
     data_table = pd.DataFrame({
@@ -201,7 +205,7 @@ if object_from_upload is not None:
     unique_value = data_table['Category'].unique()
 
     filter_multiselect = st.multiselect(
-        "Filter Category",
+        "Select category",
         unique_value,
         default = unique_value,
         help = "Select category which you want to see. Multiple categories allowed"
