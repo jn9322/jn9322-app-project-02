@@ -89,7 +89,7 @@ st.write("###### Rules in the application from XML point of view:")
 ''
 st.write('''
 Validation:
-- <total_sum> rule: sum all <price> values from <detail> and compare with <total_sum>
+- <total_sum> rule: sum all <price_amount> values from <detail> and compare with <total_sum>
 - <total_sum_services> rule: sum all <service_price> values from <detail> and compare with <total_sum_services>
 '''
 )

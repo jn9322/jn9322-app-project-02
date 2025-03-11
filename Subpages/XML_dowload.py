@@ -595,7 +595,7 @@ st.write("------")
 st.write("#### 1) Predefined file - sum matches - currency: euro - 15 detail lines")
 st.write(
     '''
-Scenario where <total_sum> and <total_sum_services> values match the sum of <price> and sum of <service_price> in detail elements. Validation in application will be passed. Currency: euro
+Scenario where <total_sum> and <total_sum_services> values match the sum of <price_amount> and sum of <service_price> in detail elements. Validation in application will be passed. Currency: euro
 '''
 )
 st.image("Pictures/V2_pictures/XML download - scenario 1.png")
@@ -610,7 +610,7 @@ st.write("------")
 st.write("#### 2) Predefind file - sum matches - currency: koruna - 12 detail lines")
 st.write(
     '''
-Scenario where <total_sum> and <total_sum_services> values match the sum of <price> and sum of <service_price> in detail elements. Validation in application will be passed. Currency: Kč Koruna
+Scenario where <total_sum> and <total_sum_services> values match the sum of <price_amount> and sum of <service_price> in detail elements. Validation in application will be passed. Currency: Kč Koruna
 '''
 )
 st.image("Pictures/V2_pictures/XML download - scenario 2.png")
@@ -620,10 +620,10 @@ if st.download_button("Download",data = xml_data_koruna  , file_name="XML_koruna
 st.write("------")
 
 # Option 3
-st.write("#### 3) redefind file - sum does not match - currency: US dollar - 15 detail lines")
+st.write("#### 3) redefind file - sum does NOT match - currency: US dollar - 15 detail lines")
 st.write(
     '''
-Scenario where <total_sum> and <total_sum_services> values do NOT match the sum of <price> and sum of <service_price> in detail elements. Validation in application will be passed with WARNING notification. Currency: US dollar
+Scenario where <total_sum> and <total_sum_services> values do NOT match the sum of <price_amount> and sum of <service_price> in detail elements. Validation in application will be passed with WARNING notification. Currency: US dollar
 '''
 )
 st.image("Pictures/V2_pictures/XML download - scenario 3.png")
