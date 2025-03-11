@@ -80,6 +80,10 @@ if object_from_upload is not None:
         ids = detail_id.get('id')
         value_attribut.append(ids)
 
+    value_attribute_int = list(map(int, value_attribut))
+    max_value_attribut = max(value_attribute_int)
+    
+
     # extra logic for recognizing whether any extra money for 'extended varanty' or 'insurance' 
     varanty = []
     for service_type in root.findall('detail'):
@@ -122,7 +126,7 @@ if object_from_upload is not None:
         
         if result < 0 or result > 0:
             st.warning("Validation not passed - summary does not equeal to line values. You can either continue with existing file or adjust the input file and upload it again.")
-            st.write(f"** Total sum in the XML invoice is: '{value_total_sum}' but summary of prices in detail lines / per product is: '{sum_price}'.")
+            st.write(f"** Total sum in the XML invoice is: '{value_total_sum:.2f}' but summary of prices in detail lines / per product is: '{sum_price:.2f}'.")
             outcome = ("Sum total - Not passed")
             result_validation.append(outcome)
 
@@ -146,7 +150,7 @@ if object_from_upload is not None:
         
         if result < 0 or result > 0:
             st.warning("Validation not passed - summary does not equeal to line values. You can either continue with existing file or adjust the input file and upload it again.")
-            st.write(f"** Total sum of SERVICES in the XML invoice is: '{value_total_sum_services_fl}' but summary of prices in detail lines is '{sum_varanty_insurance}'.")
+            st.write(f"** Total sum of SERVICES in the XML invoice is: '{value_total_sum_services_fl:.2f}' but summary of prices in detail lines is '{sum_varanty_insurance:.2f}'.")
             outcome = ("Services - Not passed")
             result_validation_services.append(outcome)
 
@@ -162,18 +166,27 @@ if object_from_upload is not None:
 
     # Button to show values
 
+    value_to_paid = value_total_sum + sum_price_varanty + sum_price_insurance
+
     st.write("------")
     st.write("#### Data Visualization:")
 
     if st.button("Summary overview"):
-        st.write(f"Invoice number: {value_invoice_num}")
-        st.write(f"Receiver of the invoice: {value_customer}")
-        st.write(f"Invoice from day (date): {value_date} - (format YYYY-MM-DD)")
-        st.write(f"Value to be paid {value_total_sum + sum_price_varanty + sum_price_insurance} {currency} (*products + services)")
-        st.write(f"Total sum of products: {value_total_sum} {currency}")
-        st.write(f"Sum of additional services: {sum_price_varanty + sum_price_insurance} {currency}")
-        st.write(f"Extended varanty: {sum_price_varanty} {currency}")
-        st.write(f"Insurance: {sum_price_insurance} {currency}")
+        st.write(f"Sumary:")
+        st.write(f" - Invoice number: {value_invoice_num}")
+        st.write(f" - Receiver of the invoice: {value_customer}")
+        st.write(f" - Invoice from day (date): {value_date} - (format YYYY-MM-DD)")
+
+        st.write(f" - Value to be paid: {value_to_paid:.2f} {currency} (*products + services)")
+        st.write(f" - Number of products: {max_value_attribut}")
+        st.write(f"Detail:")
+        st.write(f" - Total sum of products: {value_total_sum:.2f} {currency}")
+
+        sum_additional_serv = sum_price_varanty + sum_price_insurance
+
+        st.write(f" - Sum of additional services: {sum_additional_serv:.2f} {currency}")
+        st.write(f" - Extended varanty: {sum_price_varanty:.2f} {currency}")
+        st.write(f" - Insurance: {sum_price_insurance:.2f} {currency}")
 
 
 
@@ -269,7 +282,7 @@ if object_from_upload is not None:
     day_custom_2 = str("Day: "+ day_custom)
     full_date_outcome = str(date_custom +" | " + day_custom_2 +" | " + time_custom )
 
-    final_outcome = (f"{full_date_outcome} | Validation: 1. {result_obj_outcome}, 2. {result_obj_outcome_services} |||||| Receiver: {value_customer} | Price to pay (including extra services): {value_total_sum_fl + value_total_sum_services_fl} {currency}.")
+    final_outcome = (f"{full_date_outcome} | Validation: 1. {result_obj_outcome}, 2. {result_obj_outcome_services} |||||| Receiver: {value_customer} | Price to pay (including extra services): {value_to_paid:.2f} {currency}.")
 
 
     if st.download_button("Download", data= final_outcome, file_name="Summary.txt"):

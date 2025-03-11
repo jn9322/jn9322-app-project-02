@@ -5,9 +5,9 @@ st.logo("Pictures/Logo2.png", size='large')
 
 
 # Pages as objects
-testuju = st.Page(
+testing = st.Page(
     "Subpages/testuju.py",
-    title="TESTUJU"
+    title="TESTING"
     )
 
 app_purpose = st.Page(
@@ -45,7 +45,7 @@ parsing = st.Page(
 pg = st.navigation(
     {
         "About this application": [app_purpose , app_description_ArM , app_description_BPMN , xsd],
-        "Testuju": [testuju],
+        "TESTING": [testing],
         "Application functions": [download , parsing]
     }
 )
