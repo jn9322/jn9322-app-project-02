@@ -242,7 +242,7 @@ if object_from_upload is not None:
 
 
     fig_pie = px.pie(
-        data, 
+        filtered_data, 
         names = "Product",
         values = "Price",
         title = "Pie chart - ratio of the total sum"
@@ -251,7 +251,7 @@ if object_from_upload is not None:
     st.plotly_chart(fig_pie)
 
     fig_bar = px.bar(
-        data, 
+        filtered_data, 
         x="Product",
         y="Price",
         title= "Bar chart"

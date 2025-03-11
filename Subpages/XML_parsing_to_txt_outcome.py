@@ -180,6 +180,8 @@ if object_from_upload is not None:
 
         st.write(f" - Value to be paid: {value_to_paid:.2f} {currency} (*products + services)")
         st.write(f" - Number of products: {max_value_attribut}")
+        ''
+        ''
         st.write(f"Detail:")
         st.write(f" - Total sum of products: {value_total_sum:.2f} {currency}")
 
@@ -212,7 +214,7 @@ if object_from_upload is not None:
     )  
     
     if not len(filter_multiselect):
-        st.warning("Select at lease 1 category to see overview table")
+        st.warning("Select at lease 1 category to see overview table and charts")
 
     # min_value_price = data_table['Price'].min()
     # max_value_price = data_table['Price'].max()
@@ -246,16 +248,17 @@ if object_from_upload is not None:
 
 
     fig_pie = px.pie(
-        data, 
+        filtered_data, 
         names = "Product",
         values = "Price",
-        title = "Pie chart - ratio of the total sum"
+        title = "Pie chart - ratio"
         )
 
     st.plotly_chart(fig_pie)
+    
 
     fig_bar = px.bar(
-        data, 
+        filtered_data, 
         x="Product",
         y="Price",
         title= "Bar chart of products"
@@ -267,14 +270,10 @@ if object_from_upload is not None:
 
     st.write("------")
     st.write("#### Download of .txt:")
-    st.write('''Here is short summary of the original XML invoice, including result of validation and date.''')
+    st.write('''A short summary of the original XML invoice, including result of validation, date and some of the parsed data.''')
 
-    st.image("Pictures/outcome txt picture.png")
-    st.write(" ")
-    st.image("Pictures/Validation passed picture txt.png")
-    st.write(" ")
-    st.image("Pictures/Validation NOT passed picture txt.png")
-    st.write(" ")
+    st.image("Pictures/V2_pictures/txt outcome_3.png")
+
 
     # backend part
     time_objects = time.localtime()
@@ -286,7 +285,7 @@ if object_from_upload is not None:
     day_custom_2 = str("Day: "+ day_custom)
     full_date_outcome = str(date_custom +" | " + day_custom_2 +" | " + time_custom )
 
-    final_outcome = (f"{full_date_outcome} | Validation: 1. {result_obj_outcome}, 2. {result_obj_outcome_services} |||||| Receiver: {value_customer} | Price to pay (including extra services): {value_to_paid:.2f} {currency}.")
+    final_outcome = (f"{full_date_outcome} | Validation: 1. {result_obj_outcome}, 2. {result_obj_outcome_services} | Receiver: {value_customer} | Price to pay (including extra services): {value_to_paid:.2f} {currency}.")
 
 
     if st.download_button("Download", data= final_outcome, file_name="Summary.txt"):

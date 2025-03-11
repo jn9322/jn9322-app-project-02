@@ -445,12 +445,15 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		<invoice_number/>
 		<date/>
 		<price>
-			<total_sum>0.01</total_sum>
+			<total_sum/>
 			<total_sum_services/>
 			<currency/>
 		</price>
 	</header>
 	<detail id="1">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -458,6 +461,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="2">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -465,6 +471,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="3">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -472,6 +481,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="4">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -479,6 +491,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="5">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -486,6 +501,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="6">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -493,6 +511,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="7">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -500,6 +521,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="8">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -507,6 +531,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="9">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -514,6 +541,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="10">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -521,6 +551,9 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="11">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
@@ -528,10 +561,13 @@ xml_empty_template = """<?xml version="1.0" encoding="UTF-8"?>
 		</additional_service>
 	</detail>
 	<detail id="12">
+		<category/>
+		<product_name/>
+		<price_amount/>
 		<additional_service>
 			<service>N</service>
 			<service_type>None</service_type>
-			<service_price>0</service_price>
+			<service_price>0.00</service_price>
 		</additional_service>
 	</detail>
 </invoice>
@@ -548,6 +584,8 @@ Here you can download XMLs which can be used for parsing:
 2) Predefind file - sum matches - currency: koruna - 12 detail lines
 3) Predefind file - sum does not match - currency: US dollar - 15 detail lines
 4) XML Template
+
+*The number of detail lines is basically not limited as defined in the XSD / XML Schema -> no need to stick 12 or 15 lines :)
 '''
 )
 
@@ -557,7 +595,7 @@ st.write("------")
 st.write("#### 1) Predefined file - sum matches - currency: euro - 15 detail lines")
 st.write(
     '''
-Scenario where <total_sum> and <total_sum_services> values match the sum of <price> and sum of <service_price> in detail elements. Validation in application will be passed.
+Scenario where <total_sum> and <total_sum_services> values match the sum of <price> and sum of <service_price> in detail elements. Validation in application will be passed. Currency: euro
 '''
 )
 st.image("Pictures/V2_pictures/XML download - scenario 1.png")
@@ -572,10 +610,10 @@ st.write("------")
 st.write("#### 2) Predefind file - sum matches - currency: koruna - 12 detail lines")
 st.write(
     '''
-Scenario where <total_sum> field does not match the sum of <price> in detail elements. This will be seen in the parsing data step - validation is built.
+Scenario where <total_sum> and <total_sum_services> values match the sum of <price> and sum of <service_price> in detail elements. Validation in application will be passed. Currency: Kč Koruna
 '''
 )
-st.image("Pictures/XML 2 w attributes.png")
+st.image("Pictures/V2_pictures/XML download - scenario 2.png")
 if st.download_button("Download",data = xml_data_koruna  , file_name="XML_koruna_sum matches.xml"):
     st.info("Download will happen in few seconds")
 
@@ -585,10 +623,10 @@ st.write("------")
 st.write("#### 3) redefind file - sum does not match - currency: US dollar - 15 detail lines")
 st.write(
     '''
-There can be data filled into templete. Just XML structure to be downloaded.
+Scenario where <total_sum> and <total_sum_services> values do NOT match the sum of <price> and sum of <service_price> in detail elements. Validation in application will be passed with WARNING notification. Currency: US dollar
 '''
 )
-st.image("Pictures/XML 3 w attributes.png")
+st.image("Pictures/V2_pictures/XML download - scenario 3.png")
 if st.download_button("Download",data = xml_data_usdollar , file_name="XML_usdollar_sum not match.xml"):
     st.info("Download will happen in few seconds")
 
@@ -599,10 +637,11 @@ st.write("------")
 st.write("#### 4) XML Template")
 st.write(
     '''
-Application can work with many <detail> elements, it is not limited. Here example of 12 detail levels -> The data parsing and data visualization work the same way due to python for cycle
+Empty template. When data being fulfilled it is recommened to pair XML with XSD (can be downloaded in the "Description - XSD, XML Schema" page). To make sure when uploading to this application, the XML will be valid to get processed. 
 '''
 )
-st.image("Pictures/XML 4 w attributes.png")
+
+st.image("Pictures/V2_pictures/XML download - scenario 4.png")
 if st.download_button("Download",data = xml_empty_template , file_name="XML_empty_template.xml"):
     st.info("Download will happen in few seconds")
 

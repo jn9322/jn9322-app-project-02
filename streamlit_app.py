@@ -45,12 +45,15 @@ parsing = st.Page(
 pg = st.navigation(
     {
         "About this application": [app_purpose , app_description_ArM , app_description_BPMN , xsd],
-        "TESTING": [testing],
+        #"TESTING": [testing],
         "Application functions": [download , parsing]
     }
 )
+
 pg.run()
 
-
+st.sidebar.caption(
+    "Do you like this app? :) LinkedIn [Here](https://www.linkedin.com/in/jan-netolicka-12209a221/)"
+)
 
 
