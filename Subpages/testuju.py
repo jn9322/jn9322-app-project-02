@@ -7,7 +7,7 @@ import string
 import random
 import time
 
-
+''
 
 # Function for pretty print of XML elements
 def prettify(element, indent='  '):
