@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<invoice>
+  <header>
+    <customer>Jan s.r.o.</customer>
+    <invoice_number>INV-377399</invoice_number>
+    <date>2025-03-12</date>
+    <price>
+      <total_sum>60.0</total_sum>
+      <total_sum_services>6.0</total_sum_services>
+      <currency>US dollar</currency>
+  </price>
+  </header>
+  <detail id="1">
+    <category>Gaming</category>
+    <product_name>A22</product_name>
+    <price_amount>60.0</price_amount>
+    <additional_service>
+      <service>Y</service>
+      <service_type>extended varanty</service_type>
+      <service_price>6.0</service_price>
+    </additional_service>
+  </detail>
+</invoice>

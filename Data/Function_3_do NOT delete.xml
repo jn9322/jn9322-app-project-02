@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<invoice>
+  <header>
+    <customer>nevim s.r.o.</customer>
+    <invoice_number>INV-755353</invoice_number>
+    <date>2025-03-12</date>
+    <price>
+      <total_sum>3.0</total_sum>
+      <total_sum_services>0.00</total_sum_services>
+      <currency>euro</currency>
+  </price>
+  </header>
+  <detail id="1">
+    <category>Gaming</category>
+    <product_name>nevim ASSD</product_name>
+    <price_amount>3.0</price_amount>
+    <additional_service>
+      <service>N</service>
+      <service_type>None</service_type>
+      <service_price>0.00</service_price>
+    </additional_service>
+  </detail>
+</invoice>

@@ -1,8 +1,5 @@
 import streamlit as st
 import xml.etree.ElementTree as ET
-import plotly.express as px
-import pandas as pd
-import math
 import string
 import random
 import time
@@ -155,10 +152,12 @@ if st.button("submit"):
 
     st.write(f" - Customer name: {customer_input}")
     ''
-    st.write(f" - Product name: {product_name_inp}, from category: {category_selb}")
+    st.write(f" - Product name: {product_name_inp}")
+    st.write(f" - Category: {category_selb}")
     st.write(f" - Price: {price:.2f} {currency_selb}")
     ''
-    st.write(f" - Extra service: {add_service_select}, price: {service_price_fn} {currency_selb} ")
+    st.write(f" - Extra service: {add_service_select}")
+    st.write(f" - Price for the extra service: {service_price_fn} {currency_selb}")
 
     st.info("If this is what you expect you can proceed with Download button which will create XML file. If not, you can go up and change your inputs and then use the Submit button again.")
     

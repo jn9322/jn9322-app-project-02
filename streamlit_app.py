@@ -40,13 +40,22 @@ parsing = st.Page(
     title="2. XML - Parsing, Validation, Vizualization"
     )
 
+function_3 = st.Page(
+    "Subpages/Function_3_creation of XML.py",
+    title="3. XML - Creation of XML"
+    )
+
 
 # Navigation:
 pg = st.navigation(
     {
         "About this application": [app_purpose , app_description_ArM , app_description_BPMN , xsd],
         #"TESTING": [testing],
-        "Application functions": [download , parsing]
+        "Application functions": [
+            download,
+            parsing,
+            #function_3,
+            ]
     }
 )
 

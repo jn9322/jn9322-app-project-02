@@ -288,12 +288,14 @@ if object_from_upload is not None:
     final_outcome = (f"{full_date_outcome} | Validation: 1. {result_obj_outcome}, 2. {result_obj_outcome_services} | Receiver: {value_customer} | Price to pay (including extra services): {value_to_paid:.2f} {currency}.")
 
 
-    if st.download_button("Download", data= final_outcome, file_name="Summary.txt"):
-            
-        file = open("print.txt","w")
+    file_name_fstring = f"Summary-{value_invoice_num}.txt"
 
-        file.write(final_outcome)
-        file.close()
+    if st.download_button("Download", data= final_outcome, file_name= file_name_fstring):
+            
+        # file = open("print.txt","w")
+
+        # file.write(final_outcome)
+        # file.close()
         st.info("download will start in few seconds")
 
     st.write("------")
